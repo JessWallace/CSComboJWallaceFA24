@@ -1,42 +1,43 @@
 import java.util.Random;
 
 public class Deck {
-	Random rand = new Random();
 	private Card[] cards;
-	public Deck(int n) {
-		this.cards = new Card[n];
-		}
-	public Card[] getCards() {
-	return this.cards;
-	}
-
+	private static Random rand = new Random();
 	public Deck() {
 		this.cards = new Card[52];
 		int index = 0;
-		for (int suit = 0; suit <= 3; suit++) {
-			for (int rank = 1; rank <= 13; rank++) {
-				this.cards[index] = new Card(rank, suit);
+		for(int suit = 0; suit<=3; suit++) {
+			for(int rank = 0; rank <13; rank++) {
+				cards[index] = new Card(rank, suit);
 				index++;
 			}
 		}
 	}
-	public void print() {
-		for (Card card : this.cards) {
-		System.out.println(card);
-		}
+	public Deck(int n) {
+		this.cards = new Card[n];
+	}
+	public Card[] getCards() {
+		return this.cards;
 	}
 	public void shuffle() {
-		for each index i {
-			// choose a random number between i and length - 1
-			// swap the ith card and the randomly-chosen card
+		for(int i = 0; i < cards.length; i++) {
+			int num = randomInt(i, cards.length);
+			swapCards(i, num);
+			
 		}
-		}
+	}
 	private static int randomInt(int low, int high) {
-		// return a random number between low and high,
-		// including both
+		int num = rand.nextInt(high - low) + low;
+		return num;
+	}
+	private void swapCards(int i, int j) {
+		Card temp = cards[i];
+		cards[i] = cards[j];
+		cards[j] = temp;
+	}
+	public void print() {
+		for(Card card: this.cards) {
+			System.out.println(card);
 		}
-		private void swapCards(int i, int j) {
-		// swap the ith and the jth cards in the array
-		}
-		
+	}
 }
